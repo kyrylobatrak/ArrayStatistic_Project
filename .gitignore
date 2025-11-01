@@ -1,0 +1,19 @@
+# Файли конфігурації CLion
+.idea/
+
+# Виконавчі файли (скомпільовані програми)
+*.exe
+test_app
+test_app_cpp
+cross_test_app
+
+# Об'єктні файли
+*.o
+
+# Файли результатів
+results_C.txt
+results_CPP.txt
+
+# Інше системне сміття
+*~
+.DS_Store
