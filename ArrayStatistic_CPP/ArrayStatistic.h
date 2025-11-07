@@ -20,6 +20,7 @@ class ArrayStatistic {
 private:
     // "Масив масивів" реалізований як вектор векторів
     std::vector<std::vector<double>> m_arrays;
+    bool isArrayPresent(const std::vector<double>& arr) const;
     double getMean(int arr_idx) const;
     double getVariance(int arr_idx) const;
 
