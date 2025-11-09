@@ -8,11 +8,11 @@
  * Перевіряє роботу базових функцій: create, add, print, free.
  */
 
+#include "ArrayStatistic.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h> // Для system
 #include <stdbool.h>
-#include "ArrayStatistic.h"
 
 
 // Ця функція потрібна при пункті "--- Welcome to ArrayStatistic (C) Test Program ---" !!!!!
@@ -389,9 +389,36 @@ int main() {
     free_statistic(&stats_wilcox_2);
     pause_console();
 
+    // +++ ТЕСТУВАННЯ add_element та delete_by_value +++
+    printf("\n\n--- Testing add_element & delete_by_value ---\n");
+    if (stats.num_arrays > 0) {
+        printf("Before add_element:\n");
+        print_statistic(&stats);
 
+        printf("\nAdding 99.9 to array[0]...\n");
+        add_element(&stats, 0, 99.9);
+        print_statistic(&stats); // Масив [0] має стати довшим на 1 елемент
 
+        printf("\nTesting delete_by_value (looking for 100.0)...\n");
+        // (Припускаючи, що ми завантажили з файлу, де є 100.0)
+        delete_element_by_value(&stats, 100.0);
+        print_statistic(&stats);
 
+        printf("\nTesting delete_by_value (looking for 99.9)...\n");
+        delete_element_by_value(&stats, 99.9);
+        print_statistic(&stats); // Масив [0] має зменшитись
+    }
+
+    pause_console();
+
+    // +++ ТЕСТ delete_array_by_value +++
+    printf("\nTesting delete_array_by_value (looking for {7.0, 8.0, 9.0, 10.0})...\n");
+    // (Припускаючи, що ми завантажили з файлу .dat)
+    double arr_to_find[] = {7.0, 8.0, 9.0, 10.0};
+    delete_array_by_value(&stats, arr_to_find, 4);
+    print_statistic(&stats); // Масив {7.0...} має зникнути
+
+    pause_console();
 
     // --- Блок збереження ---
     printf("\n--- Testing Save ---\n");

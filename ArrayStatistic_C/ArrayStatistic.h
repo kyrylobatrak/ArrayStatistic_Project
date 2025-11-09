@@ -105,6 +105,23 @@ void delete_element(ArrayStatistic* stats, int array_index, int element_index);
 void delete_array(ArrayStatistic* stats, int array_index);
 
 /**
+ * Видаляє *перше* знайдене входження елемента (за значенням) з усіх масивів.
+ * @param stats Вказівник на структуру.
+ * @param value Значення, яке треба знайти та видалити.
+ * @return 0 якщо видалено, -1 якщо не знайдено.
+ */
+int delete_element_by_value(ArrayStatistic* stats, double value);
+
+/**
+ * Видаляє *перший* знайдений масив, який повністю ідентичний array_to_delete.
+ * @param stats Вказівник на структуру.
+ * @param array_to_delete Масив, який ми шукаємо.
+ * @param size Розмір масиву, який ми шукаємо.
+ * @return 0 якщо видалено, -1 якщо не знайдено.
+ */
+int delete_array_by_value(ArrayStatistic* stats, const double* array_to_delete, int size);
+
+/**
  * Операція "Множення" (Перетин).
  * Створює нову структуру, що містить тільки ті масиви,
  * які ідентичні в обох структурах (s1 та s2).

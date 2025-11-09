@@ -86,6 +86,20 @@ public:
     void deleteArray(int array_index);
 
     /**
+     * Видаляє *перше* знайдене входження елемента (за значенням) з усіх масивів.
+     * @param value Значення, яке треба знайти та видалити.
+     * @return true якщо видалено, false якщо не знайдено.
+     */
+    bool deleteElementByValue(double value);
+
+    /**
+     * Видаляє *перший* знайдений масив, який повністю ідентичний array_to_delete.
+     * @param array_to_delete Вектор, який ми шукаємо.
+     * @return true якщо видалено, false якщо не знайдено.
+     */
+    bool deleteArrayByValue(const std::vector<double>& array_to_delete);
+
+    /**
      * Отримує кількість масивів у структурі.
      */
     size_t getNumArrays() const;

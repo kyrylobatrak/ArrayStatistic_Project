@@ -15,6 +15,9 @@
 #include <stdbool.h>
 #include <math.h>
 
+bool are_arrays_equal(const double* arr1, int size1, const double* arr2, int size2);
+bool is_array_present(const ArrayStatistic* stats, const double* arr, int size);
+
 ArrayStatistic create_statistic(int initial_capacity) {
     ArrayStatistic stats;
 
@@ -204,7 +207,83 @@ void delete_array(ArrayStatistic* stats, int array_index) {
     stats->num_arrays--;
 }
 
+/**
+ * Додає один елемент в кінець вказаного масиву.
+ */
+void add_element(ArrayStatistic* stats, int array_index, double element) {
+    // 1. Перевірка індексу
+    if (stats == NULL || array_index < 0 || array_index >= stats->num_arrays) {
+        fprintf(stderr, "Error (add_element): Invalid array_index %d\n", array_index);
+        return;
+    }
 
+    // 2. Отримуємо поточний розмір та вказівник
+    int current_size = stats->sizes[array_index];
+    double* target_array = stats->arrays[array_index];
+
+    // 3. Розширюємо цей конкретний масив на 1
+    double* new_array_ptr = (double*)realloc(target_array, (current_size + 1) * sizeof(double));
+
+    if (new_array_ptr == NULL) {
+        fprintf(stderr, "Error (add_element): realloc failed.\n");
+        return; // Не можемо додати елемент
+    }
+
+    // 4. Додаємо новий елемент в кінець
+    new_array_ptr[current_size] = element;
+
+    // 5. Оновлюємо вказівник та розмір у структурі
+    stats->arrays[array_index] = new_array_ptr;
+    stats->sizes[array_index] = current_size + 1;
+}
+
+
+/**
+ * Видаляє *перше* знайдене входження елемента (за значенням) з усіх масивів.
+ */
+int delete_element_by_value(ArrayStatistic* stats, double value) {
+    if (stats == NULL) return -1;
+
+    // Використовуємо DBL_EPSILON для порівняння чисел з плаваючою комою
+    // (A == B) -> (fabs(A - B) < DBL_EPSILON)
+    // Потрібно #include <float.h> або <math.h> для DBL_EPSILON
+
+    // Зовнішній цикл: по масивах
+    for (int i = 0; i < stats->num_arrays; i++) {
+        // Внутрішній цикл: по елементах
+        for (int j = 0; j < stats->sizes[i]; j++) {
+            if (fabs(stats->arrays[i][j] - value) < 1e-9) {
+                printf("Found value %f at array[%d] index[%d]. Deleting...\n", value, i, j);
+                delete_element(stats, i, j);
+                return 0; // Успіх, видалили перше входження
+            }
+        }
+    }
+
+    printf("Value %f not found.\n", value);
+    return -1; // Не знайдено
+}
+
+/**
+ * Видаляє *перший* знайдений масив, який повністю ідентичний array_to_delete.
+ */
+int delete_array_by_value(ArrayStatistic* stats, const double* array_to_delete, int size) {
+    if (stats == NULL) return -1;
+
+    // Цикл по всіх масивах у структурі
+    for (int i = 0; i < stats->num_arrays; i++) {
+        // Використовуємо нашу існуючу допоміжну функцію
+        if (are_arrays_equal(stats->arrays[i], stats->sizes[i], array_to_delete, size)) {
+            // Знайшли! Викликаємо нашу існуючу функцію видалення за індексом
+            printf("Found matching array at index [%d]. Deleting...\n", i);
+            delete_array(stats, i);
+            return 0; // Успіх
+        }
+    }
+
+    printf("Array not found.\n");
+    return -1; // Не знайдено
+}
 
 /**
  * Зчитує дані зі текстового файлу у структуру.

@@ -235,6 +235,36 @@ int main() {
 
     pause_console();
 
+    // +++ ТЕСТУВАННЯ addElement та deleteElementByValue +++
+    std::cout << "\n\n--- Testing addElement & deleteElementByValue ---\n";
+    if (stats.getNumArrays() > 0) {
+        std::cout << "Before addElement:\n";
+        stats.print();
+
+        std::cout << "\nAdding 99.9 to array[0]...\n";
+        stats.addElement(0, 99.9);
+        stats.print(); // Масив [0] має стати довшим
+
+        std::cout << "\nTesting deleteElementByValue (looking for 100.0)...\n";
+        // (Припускаючи, що ми завантажили з файлу, де є 100.0)
+        stats.deleteElementByValue(100.0);
+        stats.print();
+
+        std::cout << "\nTesting deleteElementByValue (looking for 99.9)...\n";
+        stats.deleteElementByValue(99.9);
+        stats.print(); // Масив [0] має зменшитись
+    }
+
+    pause_console();
+
+    // +++ ТЕСТ deleteArrayByValue +++
+    std::cout << "\nTesting deleteArrayByValue (looking for {7.0, 8.0, 9.0, 10.0})...\n";
+    // (Припускаючи, що ми завантажили з файлу .dat)
+    stats.deleteArrayByValue({7.0, 8.0, 9.0, 10.0});
+    stats.print(); // Масив {7.0...} має зникнути
+
+    pause_console();
+
 
     // --- Блок збереження ---
     std::cout << "\n--- Testing Save ---\n";

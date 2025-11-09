@@ -126,6 +126,50 @@ void ArrayStatistic::deleteArray(int array_index) {
 }
 
 
+void ArrayStatistic::addElement(int array_index, double element) {
+    if (array_index < 0 || array_index >= m_arrays.size()) {
+        std::cerr << "Error (addElement): Invalid array_index " << array_index << "\n";
+        return;
+    }
+
+    m_arrays[array_index].push_back(element);
+}
+
+bool ArrayStatistic::deleteElementByValue(double value) {
+    // Зовнішній цикл (використовуємо індекси, бо .erase потребує ітераторів)
+    for (size_t i = 0; i < m_arrays.size(); ++i) {
+        // Внутрішній цикл
+        for (size_t j = 0; j < m_arrays[i].size(); ++j) {
+
+            if (std::fabs(m_arrays[i][j] - value) < 1e-9) {
+                std::cout << "Found value " << value << " at array[" << i << "] index[" << j << "]. Deleting...\n";
+                deleteElement(i, j); // Або m_arrays[i].erase(m_arrays[i].begin() + j);
+                return true;
+            }
+        }
+    }
+
+    std::cout << "Value " << value << " not found.\n";
+    return false;
+}
+
+
+bool ArrayStatistic::deleteArrayByValue(const std::vector<double>& array_to_delete) {
+    // Цикл по всіх масивах
+    for (size_t i = 0; i < m_arrays.size(); ++i) {
+
+        // Використовуємо вбудований operator== для std::vector
+        if (m_arrays[i] == array_to_delete) {
+            std::cout << "Found matching array at index [" << i << "]. Deleting...\n";
+            deleteArray(i); // Або m_arrays.erase(m_arrays.begin() + i);
+            return true;
+        }
+    }
+
+    std::cout << "Array not found.\n";
+    return false;
+}
+
 size_t ArrayStatistic::getNumArrays() const {
     return m_arrays.size();
 }
