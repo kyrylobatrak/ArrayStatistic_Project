@@ -119,10 +119,3 @@ You should see the following output, confirming that all statistical functions r
 --- Cross-Test (C vs C++) --- File ArrayStatistic_test.dat opened. Loading 3 arrays... Data loaded into C and C++ models successfully. Testing Spearman (diff size)... PASSED Testing Fisher F-test (0, 2)... PASSED Testing t-test (0, 2)... PASSED Testing Z-test (0, 2)... PASSED Testing Wilcoxon U-test (0, 2)... PASSED --- Cross-Test Finished ---
 
 *(Note: The `Error (Spearman): Arrays must have the same size.` message is expected, as the test correctly verifies that both modules return `NAN` for invalid data).*
-
----
-
-## 👨‍💻 Author
-
-* **Batrak K.V.**
-* *Group: Computer Mathematics, 2nd Year*
