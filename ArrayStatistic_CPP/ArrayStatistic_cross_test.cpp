@@ -56,7 +56,6 @@ int main() {
         return 1;
     }
 
-    // --- ВИПРАВЛЕННЯ ТУТ ---
     if (C_Version::load_from_file(&c_stats, data_file) != 0) {
         std::cerr << "Failed to load C data. Aborting.\n";
         return 1;
@@ -67,23 +66,23 @@ int main() {
     // 3. Запускаємо тести (використовуємо C_Version:: для всіх C-функцій)
 
     RUN_TEST("Spearman (diff size)",
-             C_Version::calculate_spearman(&c_stats, 0, 1), // <--- ВИПРАВЛЕННЯ
+             C_Version::calculate_spearman(&c_stats, 0, 1),
              cpp_stats.getSpearman(0, 1));
 
     RUN_TEST("Fisher F-test (0, 2)",
-             C_Version::calculate_fisher_test(&c_stats, 0, 2), // <--- ВИПРАВЛЕННЯ
+             C_Version::calculate_fisher_test(&c_stats, 0, 2),
              cpp_stats.getFisherTest(0, 2));
 
     RUN_TEST("t-test (0, 2)",
-             C_Version::calculate_t_test_small(&c_stats, 0, 2), // <--- ВИПРАВЛЕННЯ
+             C_Version::calculate_t_test_small(&c_stats, 0, 2),
              cpp_stats.getTTestSmall(0, 2));
 
     RUN_TEST("Z-test (0, 2)",
-             C_Version::calculate_z_test_large(&c_stats, 0, 2), // <--- ВИПРАВЛЕННЯ
+             C_Version::calculate_z_test_large(&c_stats, 0, 2),
              cpp_stats.getZTestLarge(0, 2));
 
     RUN_TEST("Wilcoxon U-test (0, 2)",
-             C_Version::calculate_wilson_test(&c_stats, 0, 2), // <--- ВИПРАВЛЕННЯ
+             C_Version::calculate_wilson_test(&c_stats, 0, 2),
              cpp_stats.getWilsonTest(0, 2));
 
     // 4. Очищення

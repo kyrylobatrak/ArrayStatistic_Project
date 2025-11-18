@@ -12,9 +12,9 @@
 #ifndef ARRAYSTATISTIC_CPP_H
 #define ARRAYSTATISTIC_CPP_H
 
-#include <vector>   // Для std::vector
-#include <string>   // Для std::string
-#include <iostream> // Для std::ostream, std::istream
+#include <vector>
+#include <string>
+#include <iostream>
 
 class ArrayStatistic {
 private:

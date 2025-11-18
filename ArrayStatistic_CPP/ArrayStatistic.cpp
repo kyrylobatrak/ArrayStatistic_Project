@@ -67,7 +67,6 @@ bool ArrayStatistic::isArrayPresent(const std::vector<double>& arr) const {
     return false;
 }
 
-// Допоміжні функції для статистики (поки що "заглушки") ---
 double ArrayStatistic::getMean(int arr_idx) const {
     if (arr_idx < 0 || arr_idx >= m_arrays.size() || m_arrays[arr_idx].empty()) {
         return 0.0;
