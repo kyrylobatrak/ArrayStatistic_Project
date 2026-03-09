@@ -56,7 +56,7 @@ ArrayStatistic_Project/ ├── .gitignore ├── ArrayStatistic_C/ │ ├
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/mecchmatProjects/CppPracticum.git](https://github.com/mecchmatProjects/CppPracticum.git)
+    git clone [https://github.com/kyrylobatrak/ArrayStatistic_Project.git](https://github.com/kyrylobatrak/ArrayStatistic_Project.git)
     cd CppPracticum
     ```
     *(Note: Assumes you cloned the main course repository)*
